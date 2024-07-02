@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //для аутентификации будут использоваться данные из таблицы
     //когда мы вбиваем данные на странице, мы не пишем хэш
-    //штука, сверяющая пароли, должна иметь возможность декодировать пароли
+    //штука, сверяющая пароли, должна иметь возможность кодировать пароли для сверки
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
