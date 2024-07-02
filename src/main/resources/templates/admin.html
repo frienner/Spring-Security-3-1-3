@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, th, td {
+            border: 0.5px solid grey;
+            border-collapse: collapse;
+        }
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2>All Users</h2>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th> First Name </th>
+        <th> Last Name </th>
+        <th> Username </th>
+        <th> Password </th>
+        <th> Roles </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td>
+            <span th:each="role : ${user.roles}">
+                <span th:text="${role.name}"></span> <br>
+            </span>
+        </td>
+        <td>
+                <span>
+                    <a th:href="@{/admin/update-user(username=${user.username})}" class="btn btn-primary">Update</a>
+                </span>
+            <span>
+                    <a th:href="@{/admin/delete-user(username=${user.username})}" class="btn btn-primary">Delete</a>
+                </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<button onclick="window.location.href = '/admin/add-user'">Add user</button>
+<br>
+<br>
+<button onclick="window.location.href = '/logout'">Logout</button>
+
+
+</body>
+</html>

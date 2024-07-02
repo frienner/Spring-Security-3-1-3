@@ -10,13 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
+//how we handle successful user authentication
 @Component
 public class SuccessUserHandler implements AuthenticationSuccessHandler {
     // Spring Security использует объект Authentication, пользователя авторизованной сессии.
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
+        //getting list of roles (authorities)
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-        if (roles.contains("ROLE_USER")) {
+        //if user role is found, redirect to user page, else idi nahui
+        if (roles.contains("ROLE_ADMIN")) {
+            httpServletResponse.sendRedirect("/admin");
+        } else if (roles.contains("ROLE_USER")) {
             httpServletResponse.sendRedirect("/user");
         } else {
             httpServletResponse.sendRedirect("/");

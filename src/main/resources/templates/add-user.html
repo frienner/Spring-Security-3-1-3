@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:form="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input[type="text"],
+        input[type="number"] {
+            width: 200px; /* Устанавливаем одинаковую ширину для всех полей ввода */
+        }
+
+        label {
+            display: inline-block;
+            width: 100px; /* Устанавливаем одинаковую ширину для всех меток */
+            text-align: right; /* Выравниваем текст меток по правому краю */
+            margin-right: 10px; /* Добавляем небольшое расстояние между меткой и полем ввода */
+        }
+
+        button {
+            margin-left:262px; /* Установите отступ слева, чтобы центрировать кнопку */
+        }
+    </style>
+</head>
+<body>
+<h2>Add User</h2>
+<br>
+
+<form th:action="@{/admin/save-user}" th:object="${user}" method="post">
+
+    <input type="hidden" th:field="*{id}">
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" th:field="*{firstName}" /><br/><br/>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" th:field="*{lastName}" /><br/><br/>
+
+    <label for="job">Username:</label>
+    <input type="text" id="job" th:field="*{username}" /><br/><br/>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" th:field="*{password}"/>
+
+    <div>
+        <label>Roles:</label>
+        <div th:each="role : ${availableRoles}">
+            <input type="checkbox" th:field="*{roles}" th:value="${role.id}"
+                   th:checked="${user.roles.contains(role)}"/>
+            <label th:text="${role.name}"></label>
+        </div>
+    </div>
+
+
+    <button type="submit">Submit</button>
+</form>
+
+<br>
+
+
+</body>
+</html>

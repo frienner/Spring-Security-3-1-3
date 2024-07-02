@@ -3,9 +3,29 @@
 <head>
     <title>Spring Security Example</title>
 </head>
-<body>
-<h1>User, welcome spring boot security page!</h1>
 
+<body>
+    <h1>Информация о пользователе</h1>
+    <div>
+        <label>Имя:</label>
+        <span th:text="${user.firstName}">[Имя]</span>
+    </div>
+    <div>
+        <label>Фамилия:</label>
+        <span th:text="${user.lastName}">[Фамилия]</span>
+    </div>
+    <div>
+        <label>Имя пользователя:</label>
+        <span th:text="${user.username}">[Имя пользователя]</span>
+    </div>
+    <div>
+        <label>Пароль:</label>
+        <span th:text="${user.password}">[Пароль]</span>
+    </div>
+    <br>
+    <br>
+    <button onclick="window.location.href = '/logout'">Logout</button>
 
 </body>
+
 </html>
